@@ -18,12 +18,21 @@ public class FileUtils {
                 String definition = split[1].trim();
 
                 String[] definitionSplit = definition.split("\\|");
-                List<String> meanings = new ArrayList<>();
+                List<String> newMeanings = new ArrayList<>();
                 for (String s : definitionSplit) {
                     s = s.trim();
-                    if(!s.isEmpty()) meanings.add(s);
+                    if(!s.isEmpty()) newMeanings.add(s);
                 }
-                slangFile.put(slang, meanings);
+
+                if (slangFile.containsKey(slang)) {
+                    List<String> oldMeanings = slangFile.get(slang);
+                    for (String meaning : newMeanings) {
+                        if(!oldMeanings.contains(meaning)) oldMeanings.add(meaning);
+                    }
+                }
+                else {
+                    slangFile.put(slang, newMeanings);
+                }
             }
         }
         catch (IOException e) {
@@ -63,6 +72,16 @@ public class FileUtils {
             bw.newLine();
         }
         catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void resetToOriginal(String originalFilePath, String workingFilePath) {
+        try (InputStream in = new FileInputStream(originalFilePath);
+             OutputStream out = new FileOutputStream(workingFilePath)) {
+
+            in.transferTo(out);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
