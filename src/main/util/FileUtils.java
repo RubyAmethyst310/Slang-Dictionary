@@ -85,4 +85,40 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+
+    public static List<String> readHistoryFile(String historyPath) {
+        List<String> history = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(historyPath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (!line.isEmpty()) {
+                    history.add(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return history;
+    }
+
+    public static void saveHistoryFile(String historyPath, List<String> history) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(historyPath))) {
+            for (String slang : history) {
+                bw.write(slang);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void appendHistory(String historyPath, String slang) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(historyPath, true))) {
+            bw.write(slang);
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

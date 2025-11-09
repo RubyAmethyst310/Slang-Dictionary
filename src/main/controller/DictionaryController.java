@@ -11,10 +11,11 @@ public class DictionaryController {
     private QuizManager quizManager;
     private final String dataFilePath = "data/slang.txt";
     private final String backupFilePath = "data/slang_backup.txt";
+    private final String historyFilePath = "data/slang_history.txt";
 
     public DictionaryController() {
         slangDictionary = new SlangDictionary();
-        historyManager = new HistoryManager();
+        historyManager = new HistoryManager(historyFilePath);
         quizManager = new QuizManager(slangDictionary);
     }
 
@@ -23,7 +24,7 @@ public class DictionaryController {
     }
 
     public void saveSlangData() {
-        FileUtils.saveSlangFile(dataFilePath, FileUtils.loadSlangFile(dataFilePath));
+        FileUtils.saveSlangFile(dataFilePath, slangDictionary.exportToMap());
     }
 
     public SlangEntry searchSlangEntry(String word) {
@@ -63,7 +64,15 @@ public class DictionaryController {
         return quizBySlang ? quizManager.quizBySlang() : quizManager.quizByDefinitions();
     }
 
+    public SlangEntry getSlangEntry(String word) {
+        return slangDictionary.searchByWord(word);
+    }
+
     public List<String> getHistory() {
         return historyManager.getHistory();
+    }
+
+    public void clearHistory() {
+        historyManager.clearHistory();
     }
 }

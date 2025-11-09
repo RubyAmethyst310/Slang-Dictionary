@@ -62,12 +62,10 @@ public class MainMenu {
         // event button
         btnSearch.addActionListener(e -> System.out.println("Open Search Panel"));
         btnManage.addActionListener(e -> System.out.println("Open Manage Words Panel"));
-        btnHistory.addActionListener(e -> System.out.println("Open History Panel"));
         btnRandom.addActionListener(e -> System.out.println("Random a slang word"));
-        // btnReset.addActionListener(e -> System.out.println("Reset dictionary to original"));
         btnQuiz.addActionListener(e -> System.out.println("Open Quiz Panel"));
 
-        //btnReset.addActionListener(e -> updateCenTerPanel(new ResetPanel(this, controller)));
+        btnHistory.addActionListener(e -> showHistoryPanel());
         btnReset.addActionListener(e -> showResetPanel());
 
         // visualize
@@ -76,17 +74,16 @@ public class MainMenu {
         frame.setVisible(true);
     }
 
-    public void updateCenTerPanel(JComponent component) {
-        mainPanel.removeAll();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(component, BorderLayout.CENTER);
-        mainPanel.revalidate();
-        mainPanel.repaint();
-    }
-
     public void showResetPanel() {
         frame.getContentPane().removeAll(); //
         frame.add(new ResetPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showHistoryPanel() {
+        frame.getContentPane().removeAll(); //
+        frame.add(new HistoryPanel(this, controller), BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }
