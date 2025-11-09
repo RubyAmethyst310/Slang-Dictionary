@@ -7,22 +7,21 @@ import java.awt.*;
 
 public class MainMenu {
     private DictionaryController controller;
+    private JPanel mainPanel;
+    private JPanel menuPanel;
+    private JFrame frame;
 
     public MainMenu(DictionaryController controller) {
         this.controller = controller;
-
-        SwingUtilities.invokeLater(() -> {
-            createAndShowGUI();
-        });;
+        SwingUtilities.invokeLater(this::createAndShowGUI);
     }
 
-    public static void createAndShowGUI() {
-        JFrame frame = new JFrame("Slang Dictionary Application");
+    public void createAndShowGUI() {
+        frame = new JFrame("Slang Dictionary Application");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        JPanel menuPanel = new JPanel();
-        menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        menuPanel= new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
 
         JButton btnSearch = new JButton("Search");
         JButton btnManage =  new JButton("Manage Words");
@@ -45,8 +44,8 @@ public class MainMenu {
         menuPanel.add(btnHistory);
         menuPanel.add(btnReset);
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridBagLayout());
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridBagLayout());
 
         JLabel welcomeLabel = new JLabel("<html><div style='text-align: center;'>"
                 + "<h1>Welcome to Smart Slang Dictionary</h1>"
@@ -54,23 +53,49 @@ public class MainMenu {
                 + "</div></html>");
 
         welcomeLabel.setFont(new Font("Montserrat", Font.BOLD, 20));
-        centerPanel.add(welcomeLabel);
+        mainPanel.add(welcomeLabel);
 
         // Add to frame
         frame.add(menuPanel, BorderLayout.NORTH);
-        frame.add(centerPanel, BorderLayout.CENTER);
+        frame.add(mainPanel, BorderLayout.CENTER);
 
         // event button
         btnSearch.addActionListener(e -> System.out.println("Open Search Panel"));
         btnManage.addActionListener(e -> System.out.println("Open Manage Words Panel"));
         btnHistory.addActionListener(e -> System.out.println("Open History Panel"));
         btnRandom.addActionListener(e -> System.out.println("Random a slang word"));
-        btnReset.addActionListener(e -> System.out.println("Reset dictionary to original"));
+        // btnReset.addActionListener(e -> System.out.println("Reset dictionary to original"));
         btnQuiz.addActionListener(e -> System.out.println("Open Quiz Panel"));
+
+        //btnReset.addActionListener(e -> updateCenTerPanel(new ResetPanel(this, controller)));
+        btnReset.addActionListener(e -> showResetPanel());
 
         // visualize
         frame.setSize(800, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public void updateCenTerPanel(JComponent component) {
+        mainPanel.removeAll();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(component, BorderLayout.CENTER);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
+
+    public void showResetPanel() {
+        frame.getContentPane().removeAll(); //
+        frame.add(new ResetPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showMainMenuPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(menuPanel, BorderLayout.NORTH);
+        frame.add(mainPanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
     }
 }
