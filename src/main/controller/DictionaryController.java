@@ -75,4 +75,8 @@ public class DictionaryController {
     public void clearHistory() {
         historyManager.clearHistory();
     }
+
+    public SlangEntry randomSlangEntry(){
+        return slangDictionary.getRandomSlangEntry();
+    }
 }

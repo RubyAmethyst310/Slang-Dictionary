@@ -62,9 +62,10 @@ public class MainMenu {
         // event button
         btnSearch.addActionListener(e -> System.out.println("Open Search Panel"));
         btnManage.addActionListener(e -> System.out.println("Open Manage Words Panel"));
-        btnRandom.addActionListener(e -> System.out.println("Random a slang word"));
+
         btnQuiz.addActionListener(e -> System.out.println("Open Quiz Panel"));
 
+        btnRandom.addActionListener(e -> showRandomPanel());
         btnHistory.addActionListener(e -> showHistoryPanel());
         btnReset.addActionListener(e -> showResetPanel());
 
@@ -84,6 +85,13 @@ public class MainMenu {
     public void showHistoryPanel() {
         frame.getContentPane().removeAll(); //
         frame.add(new HistoryPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showRandomPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new RandomPanel(this, controller), BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }

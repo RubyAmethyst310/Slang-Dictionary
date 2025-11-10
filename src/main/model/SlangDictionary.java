@@ -3,6 +3,7 @@ package main.model;
 import java.util.*;
 
 public class SlangDictionary {
+    private static final Random rand = new Random();
     private HashMap<String, SlangEntry> slangDictionary;
 
     public SlangDictionary() {
@@ -80,11 +81,9 @@ public class SlangDictionary {
     }
 
     public SlangEntry getRandomSlangEntry() {
-        if (slangDictionary.isEmpty()) {
-            return null;
-        }
+        if (slangDictionary.isEmpty()) return null;
         List<SlangEntry> list = new ArrayList<>(slangDictionary.values());
-        return list.get(new Random().nextInt(list.size()));
+        return list.get(rand.nextInt(list.size()));
     }
 
     public int slangDictionarySize() {
