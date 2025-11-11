@@ -21,10 +21,10 @@ public class MainMenu {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        menuPanel= new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
 
         JButton btnSearch = new JButton("Search");
-        JButton btnManage =  new JButton("Manage Words");
+        JButton btnManage = new JButton("Manage Words");
         JButton btnRandom = new JButton("Random");
         JButton btnQuiz = new JButton("Quiz");
         JButton btnHistory = new JButton("History");
@@ -60,11 +60,10 @@ public class MainMenu {
         frame.add(mainPanel, BorderLayout.CENTER);
 
         // event button
-        btnSearch.addActionListener(e -> System.out.println("Open Search Panel"));
         btnManage.addActionListener(e -> System.out.println("Open Manage Words Panel"));
-
         btnQuiz.addActionListener(e -> System.out.println("Open Quiz Panel"));
 
+        btnSearch.addActionListener(e -> showSearchPanel());
         btnRandom.addActionListener(e -> showRandomPanel());
         btnHistory.addActionListener(e -> showHistoryPanel());
         btnReset.addActionListener(e -> showResetPanel());
@@ -92,6 +91,27 @@ public class MainMenu {
     public void showRandomPanel() {
         frame.getContentPane().removeAll();
         frame.add(new RandomPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showSearchPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new SearchPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showSearchBySlangPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new SearchBySlangPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showSearchByDefinitionPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new SearchByDefinitionPanel(this, controller), BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }

@@ -1,3 +1,4 @@
+HI
 BAD
 STML
 BAI
@@ -26,3 +27,7 @@ BAH
 BAHAHA
 BAI
 BAIL
+=D
+:D
+UWU
+LOL

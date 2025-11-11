@@ -112,13 +112,4 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
-
-    public static void appendHistory(String historyPath, String slang) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(historyPath, true))) {
-            bw.write(slang);
-            bw.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

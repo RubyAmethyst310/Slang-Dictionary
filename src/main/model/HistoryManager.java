@@ -17,12 +17,12 @@ public class HistoryManager {
 
     public void addHistory(String slang) {
         history.addFirst(slang);
-        FileUtils.appendHistory(historyFilePath, slang);
 
         if (history.size() > MAX_HISTORY_SIZE) {
             history.removeLast();
-            FileUtils.saveHistoryFile(historyFilePath, history);
         }
+
+        FileUtils.saveHistoryFile(historyFilePath, history);
     }
 
     public List<String> getHistory() {

@@ -79,4 +79,8 @@ public class DictionaryController {
     public SlangEntry randomSlangEntry(){
         return slangDictionary.getRandomSlangEntry();
     }
+
+    public void addToHistory(String slang) {
+        historyManager.addHistory(slang);
+    }
 }

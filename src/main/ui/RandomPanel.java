@@ -23,9 +23,14 @@ public class RandomPanel extends JPanel {
         add(topPanel, BorderLayout.NORTH);
 
         // center
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(10, 0, 10, 0);
 
         // center top
         JLabel titleLabel = new JLabel("<html><div style='text-align: center;'>"
@@ -35,8 +40,7 @@ public class RandomPanel extends JPanel {
 
         titleLabel.setFont(new Font("Montserrat", Font.BOLD, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        centerPanel.add(titleLabel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        centerPanel.add(titleLabel, gbc);
 
         // center
         SlangEntry randWord = controller.randomSlangEntry();
@@ -45,26 +49,35 @@ public class RandomPanel extends JPanel {
         wordLabel.setFont(new Font("Arial", Font.BOLD, 36));
         wordLabel.setForeground(new Color(0, 128, 0)); // dark green
         wordLabel.setAlignmentX(CENTER_ALIGNMENT);
-        centerPanel.add(wordLabel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        gbc.gridy++;
+        centerPanel.add(wordLabel, gbc);
 
         String meaningText = String.join(" | ", randWord.getDefinitions());
 
-        meaningLabel = new JLabel(meaningText, SwingConstants.CENTER);
+        meaningLabel = new JLabel(
+                "<html><div style='width: 400px; text-align: center;'>"
+                        + meaningText +
+                        "</div></html>"
+        );
         meaningLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         meaningLabel.setForeground(new Color(0, 191, 255));
         meaningLabel.setAlignmentX(CENTER_ALIGNMENT);
-        centerPanel.add(meaningLabel);
-        centerPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        gbc.gridy++;
+        centerPanel.add(meaningLabel, gbc);
 
         JButton btnRandom = new JButton("Random");
         btnRandom.setAlignmentX(CENTER_ALIGNMENT);
         btnRandom.addActionListener(e -> {
             SlangEntry newWord = controller.randomSlangEntry();
             wordLabel.setText(newWord.getWord());
-            meaningLabel.setText(String.join(" | ", newWord.getDefinitions()));
+            meaningLabel.setText(
+                    "<html><div style='width: 500px; text-align: center;'>"
+                            + String.join(" | ", newWord.getDefinitions())
+                            + "</div></html>"
+            );
         });
-        centerPanel.add(btnRandom);
+        gbc.gridy++;
+        centerPanel.add(btnRandom, gbc);
 
         JPanel wrapper = new JPanel(new GridBagLayout());
         wrapper.add(centerPanel, new GridBagConstraints());
