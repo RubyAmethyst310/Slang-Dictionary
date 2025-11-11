@@ -60,9 +60,9 @@ public class MainMenu {
         frame.add(mainPanel, BorderLayout.CENTER);
 
         // event button
-        btnManage.addActionListener(e -> System.out.println("Open Manage Words Panel"));
         btnQuiz.addActionListener(e -> System.out.println("Open Quiz Panel"));
 
+        btnManage.addActionListener(e -> showManagePanel());
         btnSearch.addActionListener(e -> showSearchPanel());
         btnRandom.addActionListener(e -> showRandomPanel());
         btnHistory.addActionListener(e -> showHistoryPanel());
@@ -112,6 +112,34 @@ public class MainMenu {
     public void showSearchByDefinitionPanel() {
         frame.getContentPane().removeAll();
         frame.add(new SearchByDefinitionPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showManagePanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new ManagePanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showAddSlangPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new AddSlangPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showDeleteSlangPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new DeleteSlangPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showEditSlangPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new EditSlangPanel(this, controller), BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }

@@ -1,6 +1,5 @@
 package main;
 
-import main.util.FileUtils;
 import java.util.*;
 
 import main.controller.DictionaryController;

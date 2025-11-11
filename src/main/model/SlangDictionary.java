@@ -39,7 +39,7 @@ public class SlangDictionary {
                 }
             }
         }
-        return result.isEmpty() ? null : result;
+        return result;
     }
 
     public String addSlangEntry(String word, List<String> meanings, boolean overwrite) {
