@@ -1,6 +1,7 @@
 package main.ui;
 
 import main.controller.DictionaryController;
+import main.model.SlangEntry;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,53 +11,76 @@ public class DeleteSlangPanel extends JPanel {
     public DeleteSlangPanel(MainMenu mainMenu, DictionaryController controller) {
         setLayout(new BorderLayout());
 
+        // top
         JButton btnBack = new JButton("← Back");
         btnBack.setFocusable(false);
-
-        btnBack.addActionListener(e -> mainMenu.showManagePanel());
+        btnBack.addActionListener(e -> mainMenu.showSearchPanel());
 
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.add(btnBack);
         add(topPanel, BorderLayout.NORTH);
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        // center
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JLabel label = new JLabel("<html><div style='text-align:center;'>"
-                + "<h2>Click the button below to reset the Slang Dictionary.</h2>"
-                + "<p>Make sure that you really want to reset.</p>"
-                + "</div></html>", SwingConstants.CENTER);
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(10, 0, 10, 0);
 
-        JButton btnReset = new JButton("Reset");
-        btnReset.setFocusable(false);
-        btnReset.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // center top
+        JPanel deleteRowPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        JLabel labelInput = new JLabel("Enter a slang to delete: ");
+        JTextField textFieldInput = new JTextField(20);
+        JButton btnDelete =  new JButton("Delete");
 
-        btnReset.addActionListener(e -> {
+        deleteRowPanel.add(labelInput);
+        deleteRowPanel.add(textFieldInput);
+        deleteRowPanel.add(btnDelete);
+
+        gbc.gridy = 0;
+        centerPanel.add(deleteRowPanel, gbc);
+
+        JLabel errorLabel = new JLabel("");
+        errorLabel.setForeground(Color.RED);
+        gbc.gridy = 1;
+        centerPanel.add(errorLabel, gbc);
+
+        add(centerPanel, BorderLayout.CENTER);
+
+        btnDelete.addActionListener(e -> {
+            String word = textFieldInput.getText().trim();
+            if (word.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter a word");
+                return;
+            }
+
+            SlangEntry result = controller.getSlangEntry(word);
+
+            if (result == null) {
+                errorLabel.setText("This slang word is not in the dictionary! Please try another one.");
+                return;
+            }
+
+            errorLabel.setText("");
+
             int confirm = JOptionPane.showConfirmDialog(
                     this,
-                    "Are you sure to reset the Slang Dictionary?",
-                    "Reset Confirmation",
+                    "Are you sure to delete the Slang?",
+                    "Delete Confirmation",
                     JOptionPane.YES_NO_OPTION
             );
 
             if (confirm == JOptionPane.YES_OPTION) {
-                controller.resetData();
+                controller.deleteSlangEntry(word);
                 JOptionPane.showMessageDialog(
                         this,
-                        "Reset successfull",
+                        "Delete successfully",
                         "Success",
                         JOptionPane.INFORMATION_MESSAGE
                 );
             }
         });
-
-        centerPanel.add(Box.createVerticalGlue());
-        centerPanel.add(label);
-        centerPanel.add(Box.createVerticalStrut(20));
-        centerPanel.add(btnReset);
-        centerPanel.add(Box.createVerticalGlue());
-
-        add(centerPanel, BorderLayout.CENTER);
     }
 }

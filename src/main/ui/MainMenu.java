@@ -69,7 +69,7 @@ public class MainMenu {
         btnReset.addActionListener(e -> showResetPanel());
 
         // visualize
-        frame.setSize(800, 400);
+        frame.setSize(1000, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

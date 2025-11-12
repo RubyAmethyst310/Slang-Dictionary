@@ -58,6 +58,11 @@ public class SearchBySlangPanel extends JPanel {
         gbc.gridy++;
         centerPanel.add(meaningLabel, gbc);
 
+        JPanel filler = new JPanel();
+        gbc.gridy++;
+        gbc.weighty = 1.0;
+        centerPanel.add(filler, gbc);
+
         add(centerPanel, BorderLayout.CENTER);
 
         btnSearch.addActionListener(e -> {
@@ -73,7 +78,7 @@ public class SearchBySlangPanel extends JPanel {
             if (result == null) {
                 wordLabel.setText("");
                 meaningLabel.setText("<html><div style='text-align:center;color:red;'>"
-                        + "This slangword is not in the dictionary!<br>"
+                        + "This slang word is not in the dictionary!<br>"
                         + "Please try another one."
                         + "</div></html>");
                 return;

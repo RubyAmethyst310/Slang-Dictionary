@@ -44,7 +44,7 @@ public class ResetPanel extends JPanel {
                 controller.resetData();
                 JOptionPane.showMessageDialog(
                         this,
-                        "Reset successfull",
+                        "Reset successfully",
                         "Success",
                         JOptionPane.INFORMATION_MESSAGE
                 );
