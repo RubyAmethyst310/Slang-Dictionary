@@ -1,12 +1,12 @@
 package main.ui;
 
-import main.controller.DictionaryController;
-import main.model.SlangEntry;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.controller.DictionaryController;
+import main.model.SlangEntry;
 
 public class EditSlangPanel extends JPanel {
     private final JPanel meaningListPanel;
@@ -61,13 +61,8 @@ public class EditSlangPanel extends JPanel {
         gbc.gridy++;
         centerPanel.add(meaningScroll, gbc);
 
-//        addMeaningField();
-
         JButton btnAddMeaning = new JButton("+ Add Meaning");
         btnAddMeaning.setFocusable(false);
-//        btnAddMeaning.addActionListener(e -> {
-//            addMeaningField();
-//        });
 
         gbc.gridy++;
         centerPanel.add(btnAddMeaning, gbc);

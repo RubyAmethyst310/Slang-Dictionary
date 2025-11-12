@@ -22,7 +22,10 @@ public class QuizManager {
         while (options.size() < 4) {
             SlangEntry randomEntry = slangDictionary.getRandomSlangEntry();
             if (randomEntry != null) {
-                options.add(String.join(" | ", randomEntry.getDefinitions()));
+                String fake = String.join(" | ", randomEntry.getDefinitions());
+                if(!fake.equals(String.join(" | ",correct.getDefinitions()))) {
+                    options.add(fake);
+                }
             }
         }
 

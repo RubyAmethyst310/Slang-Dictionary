@@ -1,10 +1,10 @@
 package main.ui;
 
-import main.controller.DictionaryController;
-import main.model.SlangEntry;
-
 import javax.swing.*;
 import java.awt.*;
+
+import main.controller.DictionaryController;
+import main.model.SlangEntry;
 
 public class RandomPanel extends JPanel {
     private JLabel wordLabel;

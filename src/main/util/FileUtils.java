@@ -36,7 +36,7 @@ public class FileUtils {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error reading file: " + filePath);
         }
         return slangFile;
     }
@@ -57,7 +57,7 @@ public class FileUtils {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing file: " + filePath);
         }
     }
 
@@ -72,7 +72,7 @@ public class FileUtils {
             bw.newLine();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing file: " + filePath);
         }
     }
 
@@ -82,7 +82,7 @@ public class FileUtils {
 
             in.transferTo(out);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing file: " + originalFilePath);
         }
     }
 
@@ -97,7 +97,7 @@ public class FileUtils {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error reading history file: " + historyPath);
         }
         return history;
     }
@@ -109,7 +109,7 @@ public class FileUtils {
                 bw.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error writing history file: " + historyPath);
         }
     }
 }

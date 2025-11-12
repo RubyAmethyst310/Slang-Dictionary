@@ -1,11 +1,11 @@
 package main.ui;
 
-import main.controller.DictionaryController;
-import main.model.SlangEntry;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+
+import main.controller.DictionaryController;
+import main.model.SlangEntry;
 
 public class HistoryPanel extends JPanel {
 

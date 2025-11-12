@@ -1,9 +1,9 @@
 package main.ui;
 
-import main.controller.DictionaryController;
-
 import javax.swing.*;
 import java.awt.*;
+
+import main.controller.DictionaryController;
 
 public class SearchPanel extends JPanel {
 

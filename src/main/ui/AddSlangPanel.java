@@ -1,11 +1,11 @@
 package main.ui;
 
-import main.controller.DictionaryController;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.controller.DictionaryController;
 
 public class AddSlangPanel extends JPanel {
     private final JPanel meaningListPanel;

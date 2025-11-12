@@ -1,9 +1,9 @@
 package main.ui;
 
-import main.controller.DictionaryController;
-
 import javax.swing.*;
 import java.awt.*;
+
+import main.controller.DictionaryController;
 
 public class MainMenu {
     private DictionaryController controller;
@@ -60,10 +60,9 @@ public class MainMenu {
         frame.add(mainPanel, BorderLayout.CENTER);
 
         // event button
-        btnQuiz.addActionListener(e -> System.out.println("Open Quiz Panel"));
-
-        btnManage.addActionListener(e -> showManagePanel());
         btnSearch.addActionListener(e -> showSearchPanel());
+        btnManage.addActionListener(e -> showManagePanel());
+        btnQuiz.addActionListener(e -> showQuizPanel());
         btnRandom.addActionListener(e -> showRandomPanel());
         btnHistory.addActionListener(e -> showHistoryPanel());
         btnReset.addActionListener(e -> showResetPanel());
@@ -140,6 +139,27 @@ public class MainMenu {
     public void showEditSlangPanel() {
         frame.getContentPane().removeAll();
         frame.add(new EditSlangPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showQuizPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new QuizPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showQuizByDefinitionPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new QuizByDefinitionPanel(this, controller), BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void showQuizBySlangPanel() {
+        frame.getContentPane().removeAll();
+        frame.add(new QuizBySlangPanel(this, controller), BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }
