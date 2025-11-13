@@ -41,7 +41,6 @@ public class AddSlangPanel extends JPanel {
 
         meaningListPanel = new JPanel();
         meaningListPanel.setLayout(new BoxLayout(meaningListPanel, BoxLayout.Y_AXIS));
-        meaningListPanel.setBackground(new Color(255, 255, 230));
         meaningListPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JScrollPane meaningScroll = new JScrollPane(meaningListPanel,
@@ -129,12 +128,14 @@ public class AddSlangPanel extends JPanel {
     private void addMeaningField() {
         JTextField meaningField = new JTextField();
         meaningField.setPreferredSize(new Dimension(350, 30));
-        meaningField.setMaximumSize(new Dimension(Integer.MAX_VALUE, meaningField.getPreferredSize().height));
+        meaningField.setMaximumSize(new Dimension(350, 30));
+        meaningField.setMinimumSize(new Dimension(350, 30));
         meaningField.setBackground(new Color(255, 255, 230));
         meaningFields.add(meaningField);
 
-        JPanel fieldRow = new JPanel(new BorderLayout());
-        fieldRow.add(meaningField,  BorderLayout.CENTER);
+        JPanel fieldRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        fieldRow.setMaximumSize(new Dimension(350, 35));
+        fieldRow.add(meaningField);
 
         meaningListPanel.add(fieldRow);
         meaningListPanel.add(Box.createVerticalStrut(5));
